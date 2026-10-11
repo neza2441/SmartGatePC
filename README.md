@@ -82,11 +82,11 @@ After signing in, application screens use hash routes such as `#/overview`, `#/v
 
 ## Free-tier deployment
 
-The root `render.yaml` defines a Render Docker web service for the Laravel API and a Render static site for the React frontend. Use a free Neon PostgreSQL database for the database; Render's free web service can sleep when idle, so expect a cold start and do not rely on it for time-critical gate operations.
+The root `render.yaml` defines a free Render Docker web service for the Laravel API and a free Render static site for the React frontend. Use a Neon PostgreSQL database for persistent application data; Render's free web service can sleep when idle, so expect a cold start and do not rely on it for time-critical gate operations.
 
-1. Push this project to a GitHub repository, create a free Neon PostgreSQL project, and copy its connection details.
-2. In Render, create a Blueprint from that repository and provide the prompted database host, database name, username, and password.
-3. Set `APP_KEY` to the output of `php artisan key:generate --show` from `backend-v12`. Do not commit this key or put it in the frontend.
+1. Create a Neon PostgreSQL project and copy its connection details. In Render, use **New > Blueprint** to connect `neza2441/SmartGatePC` and select its `main` branch.
+2. During the Blueprint setup, set the prompted `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` values from Neon. Keep these credentials in Render; never commit or share them.
+3. Set `APP_KEY` to the output of `php artisan key:generate --show` run from `backend-v12`. Do not commit this key or put it in the frontend.
 4. Deploy both services. The blueprint connects the frontend API URL and backend CORS origin automatically. The API container runs production migrations at startup.
 5. Create the first administrator account securely using the Render Shell and Laravel Artisan; do not run the local demo seeder in production.
 

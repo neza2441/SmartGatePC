@@ -2,6 +2,7 @@ services:
   - type: web
     name: smartgate-api
     runtime: docker
+    plan: free
     rootDir: backend-v12
     dockerfilePath: ./Dockerfile
     healthCheckPath: /up
